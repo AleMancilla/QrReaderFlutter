@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qreader/src/pages/Direcciones_Page.dart';
 import 'package:qreader/src/pages/Mapas_Pages.dart';
 
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: _crearBottomNavigatorBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: _scanQR,
         child: Icon(Icons.zoom_out_map),
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -62,5 +63,17 @@ class _HomePageState extends State<HomePage> {
       case 1: return DireccionesPage();
       default: return MapasPage();
     } 
+  }
+
+  _scanQR() async{
+    String futureString ='' ;
+    try {
+      futureString = await scanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
+
+    print("valor de future es $futureString");
+    
   }
 }
