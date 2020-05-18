@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'QrRoute',
+      debugShowCheckedModeBanner: false,
       initialRoute: "/home",
       routes: {
         "/home": (BuildContext context) => HomePage(),
