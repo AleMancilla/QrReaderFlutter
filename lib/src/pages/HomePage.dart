@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qreader/src/pages/Direcciones_Page.dart';
 import 'package:qreader/src/pages/Mapas_Pages.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
 
