@@ -66,6 +66,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async{
+    //geo:40.70757880037786,-73.94276991328128
+    //http://www.google.com
     String futureString ='' ;
     try {
       futureString = await scanner.scan();
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage> {
       futureString = e.toString();
     }
 
-    print("valor de future es $futureString");
+    print("valor de future es ############################################## $futureString");
     
   }
 }
