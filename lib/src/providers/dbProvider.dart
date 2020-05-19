@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:qreader/src/models/scan_models.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 class DBProvider{
@@ -35,5 +36,23 @@ class DBProvider{
       }
     );
 
+  }
+
+  nuevoScanRaw(ScanModel nuevoScan) async {
+    final db = await database;
+
+    final res = await db.rawInsert(
+      "INSERT INTO Scans (id, tipo, valor) "
+      "VALUES ( ${nuevoScan.id} , '${nuevoScan.tipo}', '${nuevoScan.valor}')"
+    );
+
+    return res;
+
+  }
+
+  nuevoScan(ScanModel nuevoScan)async{
+    final db = await database;
+    final res = db.insert('Scan', nuevoScan.toJson());
+    return res;
   }
 }
