@@ -25,7 +25,7 @@ class DBProvider{
       onOpen: (db){
 
       },
-      onCreate: (Database db, int version){
+      onCreate: (Database db, int version) async {
         await db.execute(
         'CREATE TABLE Scans ('
         ' id INTEGER PRIMARYKEY'
@@ -52,7 +52,35 @@ class DBProvider{
 
   nuevoScan(ScanModel nuevoScan)async{
     final db = await database;
-    final res = db.insert('Scan', nuevoScan.toJson());
+    final res = await db.insert('Scans', nuevoScan.toJson());
     return res;
+  }
+
+  // SELECT - obtener informacion 
+  Future<ScanModel> getScanId(int id) async {
+    final db = await database;
+    final res = await db.query('Scans',where: 'id = ?', whereArgs: [id]);
+    return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
+  }
+
+  Future<List<ScanModel>> getTodosScans () async {
+    final db = await database;
+    final res = await db.query('Scans');
+
+    List<ScanModel> list = res.isNotEmpty 
+                            ? res.map((c)=>ScanModel.fromJson(c)).toList()
+                            : [];
+    return list;
+  }
+
+  
+  Future<List<ScanModel>> getScansPorTipo (String tipo) async {
+    final db = await database;
+    final res = await db.rawQuery("SELECT * FROM Scans WHERE tipo = '$tipo'");
+
+    List<ScanModel> list = res.isNotEmpty 
+                            ? res.map((c)=>ScanModel.fromJson(c)).toList()
+                            : [];
+    return list;
   }
 }
