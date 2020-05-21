@@ -29,6 +29,7 @@ class MapasPage extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(Icons.cloud_queue, color: Theme.of(context).primaryColor,),
                     title: Text(scans[i].valor),
+                    subtitle: Text(scans[i].id.toString()),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey,),
                 ),
               ),
