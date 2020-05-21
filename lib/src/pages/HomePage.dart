@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qreader/src/bloc/ScansBloc.dart';
 import 'package:qreader/src/models/scan_models.dart';
-import 'package:qreader/src/providers/dbProvider.dart';
+//import 'package:qreader/src/providers/dbProvider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qreader/src/pages/Direcciones_Page.dart';
 import 'package:qreader/src/pages/Mapas_Pages.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scanBloc = new ScansBloc();
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ class _HomePageState extends State<HomePage> {
         title: Text("QrReader",style: TextStyle(color: Colors.white),),
         actions: <Widget>[
           IconButton(
-            onPressed: (){},
+            onPressed: (){
+              scanBloc.borrarTodosScans();
+            },
             padding: EdgeInsets.all(10.0),
             icon: Icon(Icons.delete_forever)
           )
@@ -81,7 +85,8 @@ class _HomePageState extends State<HomePage> {
 
     if (futureString != null){
       final scan = ScanModel(valor: futureString);
-      DBProvider.db.nuevoScan(scan);
+      //DBProvider.db.nuevoScan(scan);
+      scanBloc.agregarScan(scan);
     }
 
 
