@@ -22,10 +22,15 @@ class MapasPage extends StatelessWidget {
           }else{
             return ListView.builder(
               itemCount: scans.length,
-              itemBuilder: (BuildContext context, int i)=>ListTile(
-                leading: Icon(Icons.cloud_queue, color: Theme.of(context).primaryColor,),
-                title: Text(scans[i].valor),
-                trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey,),
+              itemBuilder: (BuildContext context, int i)=>Dismissible(
+                  key: UniqueKey(),
+                  onDismissed: (direction) => DBProvider.db.deleteScans(scans[i].id),
+                  background: Container(color: Colors.redAccent,),
+                  child: ListTile(
+                    leading: Icon(Icons.cloud_queue, color: Theme.of(context).primaryColor,),
+                    title: Text(scans[i].valor),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey,),
+                ),
               ),
             );
           }
