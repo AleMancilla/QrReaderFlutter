@@ -28,13 +28,15 @@ class DBProvider{
       onCreate: (Database db, int version) async {
         await db.execute(
         'CREATE TABLE Scans ('
-        ' id INTEGER PRIMARYKEY'
-        ' tipo TEXT'
+        ' id INTEGER PRIMARY KEY, '
+        ' tipo TEXT, '
         ' valor TEXT'
         ')'
         );
       }
     );
+
+    
 
   }
 
@@ -63,7 +65,7 @@ class DBProvider{
     return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
   }
 
-  Future<List<ScanModel>> getTodosScans () async {
+  Future<List<ScanModel>> getTodosScans() async {
     final db = await database;
     final res = await db.query('Scans');
 
@@ -74,7 +76,7 @@ class DBProvider{
   }
 
   
-  Future<List<ScanModel>> getScansPorTipo (String tipo) async {
+  Future<List<ScanModel>> getScansPorTipo(String tipo) async {
     final db = await database;
     final res = await db.rawQuery("SELECT * FROM Scans WHERE tipo = '$tipo'");
 
@@ -85,9 +87,22 @@ class DBProvider{
   }
 
   // actualizar registros
-  Future<int> updateScan (ScanModel scan) async {
+  Future<int> updateScan(ScanModel scan) async {
     final db = await database;
     final res = await db.update('Scans', scan.toJson(),where: 'id = ?', whereArgs: [scan.id]);
+    return res;
+  }
+
+  // borrar registros 
+  Future<int> deleteScans(int id) async {
+    final db = await database;
+    final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  Future<int> deleteAll()async {
+    final db = await database;
+    final res = db.rawDelete('DELETE FROM Scans');
     return res;
   }
 }

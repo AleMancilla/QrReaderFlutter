@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qreader/src/models/scan_models.dart';
+import 'package:qreader/src/providers/dbProvider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qreader/src/pages/Direcciones_Page.dart';
 import 'package:qreader/src/pages/Mapas_Pages.dart';
@@ -68,13 +70,21 @@ class _HomePageState extends State<HomePage> {
 
   _scanQR() async{
     //geo:40.70757880037786,-73.94276991328128
-    //http://www.google.com
-    String futureString ='' ;
-    try {
-      futureString = await scanner.scan();
-    } catch (e) {
-      futureString = e.toString();
+    String futureString = "http://www.google.com";
+    
+    //  String futureString ='' ;
+    //  try {
+    //    futureString = await scanner.scan();
+    //  } catch (e) {
+    //    futureString = e.toString();
+    //  }
+
+    if (futureString != null){
+      final scan = ScanModel(valor: futureString);
+      DBProvider.db.nuevoScan(scan);
     }
+
+
 
     print("valor de future es ############################################## $futureString");
     
