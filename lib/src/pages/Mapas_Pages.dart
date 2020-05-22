@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qreader/src/bloc/ScansBloc.dart';
 import 'package:qreader/src/models/scan_models.dart';
 //import 'package:qreader/src/providers/dbProvider.dart';
+import 'package:qreader/src/utils/utils.dart' as utils;
 
 class MapasPage extends StatelessWidget {
 
@@ -18,6 +19,7 @@ class MapasPage extends StatelessWidget {
           }
 
           final scans = snapshot.data;
+          
           if(scans.length == 0){
             return Center(
               child: Text("No hay informacion"),
@@ -34,6 +36,7 @@ class MapasPage extends StatelessWidget {
                     title: Text(scans[i].valor),
                     subtitle: Text(scans[i].id.toString()),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey,),
+                    onTap: (){utils.abrirScan(scans[i]);},
                 ),
               ),
             );

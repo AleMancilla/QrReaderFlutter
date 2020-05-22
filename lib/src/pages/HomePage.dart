@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qreader/src/bloc/ScansBloc.dart';
 import 'package:qreader/src/models/scan_models.dart';
+import 'package:qreader/src/utils/utils.dart' as utils;
 //import 'package:qreader/src/providers/dbProvider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qreader/src/pages/Direcciones_Page.dart';
@@ -23,9 +24,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("QrReader",style: TextStyle(color: Colors.white),),
         actions: <Widget>[
           IconButton(
-            onPressed: (){
-              scanBloc.borrarTodosScans();
-            },
+            onPressed:scanBloc.borrarTodosScans,
             padding: EdgeInsets.all(10.0),
             icon: Icon(Icons.delete_forever)
           )
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
 
   _scanQR() async{
     //geo:40.70757880037786,-73.94276991328128
-    String futureString = "http://www.google.com";
+    String futureString = "https://pub.dev/packages/url_launcher";
     
     //  String futureString ='' ;
     //  try {
@@ -87,11 +86,13 @@ class _HomePageState extends State<HomePage> {
       final scan = ScanModel(valor: futureString);
       //DBProvider.db.nuevoScan(scan);
       scanBloc.agregarScan(scan);
+      utils.abrirScan(scan);
     }
 
 
 
     print("valor de future es ############################################## $futureString");
+    
     
   }
 }
