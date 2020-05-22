@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: _crearBottomNavigatorBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: _scanQR,
+        onPressed: () => _scanQR(context),
         child: Icon(Icons.zoom_out_map),
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -71,9 +71,9 @@ class _HomePageState extends State<HomePage> {
     } 
   }
 
-  _scanQR() async{
+  _scanQR(BuildContext context) async{
     //geo:40.70757880037786,-73.94276991328128
-    String futureString = "https://pub.dev/packages/url_launcher";
+    String futureString = "geo:40.70757880037786,-73.94276991328128";
     
     //  String futureString ='' ;
     //  try {
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
       final scan = ScanModel(valor: futureString);
       //DBProvider.db.nuevoScan(scan);
       scanBloc.agregarScan(scan);
-      utils.abrirScan(scan);
+      utils.abrirScan(context,scan);
     }
 
 
