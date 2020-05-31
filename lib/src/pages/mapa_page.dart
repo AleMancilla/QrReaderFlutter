@@ -23,7 +23,8 @@ class MapaPage extends StatelessWidget {
         zoom: 15
       ),
       layers: [
-        _crearMap()
+        _crearMap(),
+        _crearMarcador(map)
       ],
     );
   }
@@ -36,6 +37,21 @@ class MapaPage extends StatelessWidget {
         'accessToken':'pk.eyJ1IjoiYWxlbWFuY2lsbGEiLCJhIjoiY2thaHF1OXR4MDhtYzJxbzU2cjh4MmxmeCJ9.qK0fT7IkhuKadk-8VJ4Hqw',
         'id':'mapbox.satellite'
       }
+    );
+  }
+
+  _crearMarcador(ScanModel scan) {
+    return MarkerLayerOptions(
+      markers: <Marker>[
+        Marker(
+          point: scan.getLatlng(),
+          width: 120.0,
+          height: 120.0,
+          builder: (BuildContext context) => Container(
+            child: Icon(Icons.location_on,size: 70.0,),
+          )
+        )
+      ]
     );
   }
 }
