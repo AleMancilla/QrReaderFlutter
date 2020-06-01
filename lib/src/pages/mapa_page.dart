@@ -17,6 +17,7 @@ class MapaPage extends StatelessWidget {
         ],
       ),
       body: _crearFlutterMap(scan),
+      floatingActionButton: _crearBotonFlotante(context),
     );
   }
 
@@ -57,6 +58,14 @@ class MapaPage extends StatelessWidget {
           )
         )
       ]
+    );
+  }
+
+  _crearBotonFlotante(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.repeat),
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: (){}
     );
   }
 }
