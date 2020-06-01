@@ -42,6 +42,7 @@ class MapaPage extends StatelessWidget {
       additionalOptions: {
         'accessToken':'pk.eyJ1IjoiYWxlbWFuY2lsbGEiLCJhIjoiY2thaHF1OXR4MDhtYzJxbzU2cjh4MmxmeCJ9.qK0fT7IkhuKadk-8VJ4Hqw',
         'id':'mapbox.satellite'
+        //satellite , 
       }
     );
   }
